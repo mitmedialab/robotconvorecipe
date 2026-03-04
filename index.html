@@ -3,23 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Social Human Robot Embodied Conversation (SHREC) Dataset">
+        content="A Modern System Recipe for Situated Embodied Human-Robot Conversation with Real-Time Multimodal LLMs and Tool-Calling">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Social Human Robot Embodied Conversation (SHREC) Dataset: Benchmarking Foundational Models’ Social Reasoning</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+  <title>Situated Embodied Conversation: Real-Time Multimodal LLMs + Tool-Calling</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -32,38 +18,113 @@
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
 
-  <!-- (1) Changed favicon to shrec_logo.png -->
-  <link rel="icon" href="./static/images/shrec_logo.png">
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 
-  <!-- Custom CSS for logo next to title -->
   <style>
     .title-container {
-        display: flex; /* Use Flexbox */
-        align-items: center; /* Vertically align items in the center */
-        justify-content: center; /* Center the items horizontally in the container */
-        flex-wrap: wrap; /* Allow items to wrap to the next line if container is too narrow */
-        margin-bottom: 20px; /* Add some space below the combined title block */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
     }
 
-    /* (3) Increased logo size */
-    .shrec-logo {
-        height: 80px; /* Adjusted height for a larger logo */
-        margin-right: 15px; /* Add space between the logo and the title text */
-        flex-shrink: 0; /* Prevent the logo from shrinking */
-    }
-
-    /* Adjust h1 margin within the container */
     .title-container .publication-title {
         margin-top: 0;
         margin-bottom: 0;
-        /* If the title is very long, you might need to adjust width or flex-basis */
-        /* For example: flex-basis: 80%; */
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 6px 10px;
+      text-align: center;
+    }
+    .results-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .results-table td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+    .tool-name {
+      font-family: monospace;
+      background-color: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.85rem;
+    }
+    .scenario-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .scenario-table th, .scenario-table td {
+      border: 1px solid #ddd;
+      padding: 8px 10px;
+      text-align: center;
+    }
+    .scenario-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .scenario-table td:first-child,
+    .scenario-table td:nth-child(2) {
+      text-align: left;
+    }
+    .check { color: #27ae60; }
+    .cross { color: #ccc; }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .video-grid video {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+    .video-grid .video-cell {
+      text-align: center;
+    }
+    .video-grid .video-cell p {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 4px;
+    }
+    .video-highlight {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .video-highlight video {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+    }
+    .video-highlight .video-cell {
+      text-align: center;
+    }
+    .video-highlight .video-cell p {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 6px;
+    }
+    .scenario-label {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: #333;
     }
   </style>
 
@@ -85,79 +146,58 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <!-- Start of Title and Logo container -->
           <div class="title-container">
-            <!-- (2) Placed logo before title H1 -->
-            <img src="./static/images/shrec_logo.png" alt="SHREC Logo" class="shrec-logo">
-            <!-- (4) Decreased title font size (Bulma class is-1 -> is-2) -->
-            <h1 class="title is-2 publication-title">Social Human Robot Embodied Conversation (SHREC) Dataset: Benchmarking Foundational Models’ Social Reasoning</h1>
+            <h1 class="title is-2 publication-title">A Modern System Recipe for Situated Embodied Human&ndash;Robot Conversation with Real-Time Multimodal LLMs and Tool-Calling</h1>
           </div>
-          <!-- End of Title and Logo container -->
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://dongwonl.com/">Dong Won Lee</a><sup>1</sup>,
             </span>
-	    <span class="author-block">
-              <a href="https://ybkim95.github.io/">Yubin Kim</a><sup>1</sup>,
-            </span>
-	    <span class="author-block">
-              <a href="https://www.linkedin.com/in/denison-guvenoz/">Denison Guvenoz</a><sup>2</sup>,
-            </span>
-	    <span class="author-block">
-              <a href="https://www.sooyeonjeong.com/">Sooyeon Jeong</a><sup>2</sup>,
+            <span class="author-block">
+              <a href="https://sarahgillet.com/">Sarah Gillet</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://www.media.mit.edu/people/pmalacho/overview/">Parker Malachowsky</a><sup>1</sup>,
+              <a href="https://www.cs.cmu.edu/~morency/">Louis-Philippe Morency</a><sup>2</sup>,
             </span>
-	    <span class="author-block">
-	      <a href="https://www.cs.cmu.edu/~morency/">Louis-Philippe Morency</a><sup>3</sup>,
-	    </span>
-	    <span class="author-block">
-	      <a href="https://www.media.mit.edu/people/cynthiab/overview/">Cynthia Breazeal</a><sup>1</sup>,
-	    </span>
-	    <span class="author-block">
-	      <a href="https://www.media.mit.com/people/haewon/overview/">Hae Won Park</a><sup>1</sup>
-	    </span>
-            </div>
+            <span class="author-block">
+              <a href="https://www.media.mit.edu/people/cynthiab/overview/">Cynthia Breazeal</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.media.mit.edu/people/haewon/overview/">Hae Won Park</a><sup>1</sup>
+            </span>
+          </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Massachusetts Institute of Technology</span><br>
-            <span class="author-block"><sup>2</sup>Purdue University</span><br>
-            <span class="author-block"><sup>3</sup>CMU Language Technology Institute</span>
+            <span class="author-block"><sup>2</sup>Carnegie Mellon University</span>
           </div>
 
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
+            <div class="publication-links" style="margin-top: 12px;">
+              <!-- Paper (PDF) -->
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2504.13898"
-                   class="external-link button is-normal is-rounded is-dark">
+                <a href="https://arxiv.org/pdf/2602.04157.pdf"
+                  class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
+                    <i class="fas fa-file-pdf"></i>
                   </span>
                   <span>Paper</span>
                 </a>
               </span>
-	      <span class="link-block">
-                <a href="https://github.com/mitmedialab/SHREC"
-                   class="external-link button is-normal is-rounded is-dark">
+
+              <!-- Code -->
+              <span class="link-block">
+                <a href="https://github.com/YOUR_ORG/YOUR_REPO"
+                  class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
-                      <i class="fab fa-github"></i>
+                    <i class="fab fa-github"></i>
                   </span>
-                  <span>GitHub</span>
+                  <span>Code</span>
                 </a>
               </span>
-<!--               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2405.15708"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span> -->
             </div>
-
+          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -165,105 +205,587 @@
   </div>
 </section>
 
+<!-- Teaser / Main Figure -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!--video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/mainfigure.png" type="picture">
-      </video-->
-      <img src="./static/images/hsri_teaser.png" width="60%" alt="Main Figure AgentClinic">
-      <!-- <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Health-LLM</span> is a framework for evaluating LLM performance on a diverse set of health prediction tasks, training and prompting the models with multi-modal health data.
-      </h2> -->
+    <div class="hero-body has-text-centered">
+      <figure style="margin: 0; display: block;">
+        <img src="./static/images/main_fig.png" style="width: 100%; display: block;" alt="System overview: Real-time situated conversation system with streaming egocentric vision and audio processed by a real-time multimodal LM.">
+        <figcaption style="margin-top: 12px; font-size: 0.95rem; color: #555; text-align: center;">
+          <b>Figure 1:</b> Overview of our real-time situated conversation system. Streaming egocentric vision and audio are processed by a real-time multimodal LM, which generates spoken dialogue and issues low-latency function calls to external tools for attention and active perception (e.g., <span class="tool-name">look_at_person</span>, <span class="tool-name">look_at_object</span>, <span class="tool-name">look_around</span>, <span class="tool-name">look_for</span>, <span class="tool-name">use_vision</span>).
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
 
+<!-- Abstract -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-		  Our work aims to advance the social reasoning of embodied artificial intelligence (AI) agents in real-world social interactions. Recently, language models (LMs) and foundational models (FMs) are being utilized as automatic evaluators of human-AI interactions with the goal of eventually being used to improve the policy of the AI agent. To enable further research in this direction, we introduce a large-scale real-world Social Human Robot Embodied Conversation (SHREC) Dataset to benchmark the capabilities of LMs and FMs to reason about social interactions, specifically with regard to robot social errors and competencies in real-world human-robot interactions. Our dataset consists of 547 real-world human social robot interaction videos and over 10K annotations, detailing the robot’s social errors, competencies, rationale, and corrective actions, capturing unique aspects of human-AI interaction only present in real-world interactions. To further assess AI models' ability to reason about social interactions, we propose eight new benchmark tasks for evaluating centered around whether AI models can (1) evaluate social interactions via detecting social errors and competencies, (2) identify the explanatory factors associated to errors and competencies, (3) understand the flow of real-world social interactions, and (4) provide reasons and corrective actions for social errors. Human studies and experiments with modern LMs and FMs reveal that current models struggle with these tasks, demonstrating that our dataset and benchmark provides a step forward towards socially intelligent AI.
-	  </p>
+            Situated embodied conversation requires robots to interleave real-time dialogue with active perception: deciding <i>what to look at, when to look, and what to say</i> under tight latency constraints. We present a simple, minimal system recipe that pairs a real-time multimodal language model with a small set of tool interfaces for attention and active perception. We study six home-style scenarios that require frequent attention shifts and increasing perceptual scope. Across four system variants, we evaluate turn-level tool-decision correctness against human annotations and collect subjective ratings of interaction quality. Results indicate that real-time multimodal large language models and tool use for active perception is a promising direction for practical situated embodied conversation.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Highlight Videos -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Dataset Characteristics</h2>
-    <div class="columns is-centered">
-      <div class="column is-full">
+    <h2 class="title is-3 has-text-centered">Example: Plant Doctor Scenario</h2>
+    <p class="has-text-centered" style="margin-bottom: 20px; color: #555;">A user asks an assistant to visually identify a houseplant brought into view and then provide practical care guidance. The same situated conversation recipe deployed across two robot platforms (Jibo, Reachy Mini) and two real-time backends (OpenAI Realtime, Gemini Live).</p>
+    <div class="video-highlight">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata">
+          <source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_openai.mp4" type="video/mp4">
+        </video>
+        <p>Jibo &mdash; OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata">
+          <source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_gemini.mp4" type="video/mp4">
+        </video>
+        <p>Jibo &mdash; Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata">
+          <source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/reachy/plant_openai_reachy.mp4" type="video/mp4">
+        </video>
+        <p>Reachy Mini &mdash; OpenAI Realtime</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Robot Platforms -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Robot Platforms</h2>
+    <div style="display: flex; gap: 1px; margin-top: 10px;">
+      <div style="flex: 1; text-align: center;">
+        <div style="width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 1px;">
+          <img src="./static/images/jibo.png" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;" alt="Jibo robot platform in a home-style environment.">
+        </div>
+        <p style="margin:4px 0 0; font-weight:500;">Jibo</p>
+      </div>
+      <div style="flex: 1; text-align: center;">
+        <div style="width: 100%; aspect-ratio: 4/3; overflow: hidden; border-radius: 1px;">
+          <img src="./static/images/reachy.png" style="width: 100%; height: 100%; object-fit: cover; object-position: center bottom;" alt="Reachy Mini robot platform in a home-style environment.">
+        </div>
+        <p style="margin-top: 1px;  margin-bottom: 0; font-weight: 500;">Reachy Mini</p>
+      </div>
+    </div>
+    <p class="has-text-centered" style="font-size: 0.9rem; color: #555; margin-top: 4px;">
+      <b>Figure 2:</b> The two robot platforms used in our study. The same system recipe is deployed on both by swapping only the embodiment adapter.
+    </p>
+  </div>
+</section>
+
+
+
+
+<!-- Tool Interface / Methods -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Tool Interface for Attention &amp; Active Perception</h2>
+    <div class="content has-text-justified">
+      <p>
+        We organize the system around two main components: (1) a <b>real-time multimodal language model</b> (e.g., OpenAI Realtime / Gemini Live) that handles streaming audio/video and conversational mechanics, and (2) <b>function calling for tool-mediated robot actions</b> for attentional control and active perception. The LM decides <i>what to say, what to look at, and when</i> by interleaving conversation generation with structured tool calls:
+      </p>
+      <ul>
+        <li><span class="tool-name">look_at_person</span> &mdash; Closed-loop attentional primitive that continuously steers the robot's gaze toward the speaker using person tracking and spatial audio.</li>
+        <li><span class="tool-name">look_at_object</span> &mdash; Mirrors <span class="tool-name">look_at_person</span>, replacing the person tracker with object detection + temporal tracking (SAM3).</li>
+        <li><span class="tool-name">look_around</span> &mdash; Exploratory sensing primitive that performs a structured sweep of the environment and records anchored viewpoints for later retrieval.</li>
+        <li><span class="tool-name">look_for</span> &mdash; Targeted retrieval-and-attend primitive: selects the most relevant previously observed viewpoint for a natural-language query using a VLM scorer, then directs the robot's gaze to that viewpoint.</li>
+        <li><span class="tool-name">use_vision</span> &mdash; On-demand perception query: sends the latest camera frame to the real-time LM when visual evidence is needed for the next response.</li>
+      </ul>
+    </div>
+    <!-- Visual Map Figure -->
+    <div class="columns is-centered" style="margin-top: 20px;">
+      <div class="column is-full has-text-centered">
         <figure class="image">
-          <img src="./static/images/hsri_stat.png" alt="Figure 2: Overall characteristics of the SHREC Dataset.">
-          <figcaption class="has-text-centered"><b>Figure 2</b>: Overall characteristics of the SHREC Dataset. Our dataset contains high overlapping annotations with a high level of agreement among annotators regarding error and competency labels. The dataset includes more annotations from the verbal channel compared to the non-verbal one, with a balanced proportion of error and competency labels. Amongst various social attributes, with the majority of annotations falling under the category of conversational mechanics, followed by intention and engagement.</figcaption>
+          <img src="./static/images/visual_map_6.png" style="max-width: 55%; margin: auto;" alt="Visual memory map: look_around captures anchored viewpoints, look_for retrieves the best match for a query.">
+          <figcaption class="has-text-centered" style="margin-top: 10px;"><b>Figure 3:</b> Lightweight "memory map" for off-camera grounding. <span class="tool-name">look_around</span> captures anchored viewpoints during a sweep; <span class="tool-name">look_for</span> retrieves the most relevant viewpoint for a text query using a VLM scorer.</figcaption>
         </figure>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Interaction Scenarios -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Benchmark Tasks</h2>
+    <h2 class="title is-3 has-text-centered">Interaction Scenarios</h2>
+    <div class="content has-text-justified">
+      <p>
+        We designed six home-style interaction scenarios that progressively increase the demands on visual grounding and perceptual scope, from person-only understanding to room-scale multi-object reference with scene changes.
+      </p>
+    </div>
     <div class="columns is-centered">
       <div class="column is-full">
+        <div style="overflow-x: auto;">
+          <table class="scenario-table">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Goal</th>
+                <th>Duration</th>
+                <th>Vision</th>
+                <th>Person</th>
+                <th>Object(s)</th>
+                <th>Map</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Posture Coach</td>
+                <td>Identify posture issue; coach and verify improvement.</td>
+                <td>01:39</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td class="cross">N</td>
+                <td class="cross">N</td>
+              </tr>
+              <tr>
+                <td>Whiteboard</td>
+                <td>Solve a trig problem using whiteboard diagram.</td>
+                <td>02:12</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td>Y (1)</td>
+                <td class="cross">N</td>
+              </tr>
+              <tr>
+                <td>Lamp Placement</td>
+                <td>Choose a lamp location using a room sweep.</td>
+                <td>02:05</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td>Y (1)</td>
+                <td>Y (1)</td>
+              </tr>
+              <tr>
+                <td>Plant Doctor</td>
+                <td>Find plant and diagnose plant health.</td>
+                <td>02:12</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td>Y (1)</td>
+                <td>Y (1)</td>
+              </tr>
+              <tr>
+                <td>Outfit Check</td>
+                <td>Find outfits in room, compare options on-body.</td>
+                <td>02:21</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td>Y (2)</td>
+                <td>Y (1)</td>
+              </tr>
+              <tr>
+                <td>Pack / Find Objects</td>
+                <td>Locate items via scan; re-scan after changes.</td>
+                <td>02:03</td>
+                <td class="check">Y</td>
+                <td>Y (1)</td>
+                <td>Y (3)</td>
+                <td>Y (2)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="margin-top: 10px; font-size: 0.9rem; color: #555;">
+          <b>Table 1:</b> Task descriptions and visual requirements. <b>Person</b>, <b>Object(s)</b>, and <b>Map</b> specify which visual entities and environment sweeps are required. Counts in parentheses give the number of distinct targets or map updates.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- System Variants / Ablations -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">System Variants</h2>
+    <div class="content has-text-justified">
+      <p>We evaluate four system variants to isolate the contribution of key system elements:</p>
+      <ul>
+        <li><b>OpenAI Realtime</b> &mdash; Full system with person, object, and environment sweep tools enabled.</li>
+        <li><b>OpenAI Realtime w/o Object</b> &mdash; Disables object tracking and search (<span class="tool-name">look_for</span>, <span class="tool-name">look_at_object</span>).</li>
+        <li><b>OpenAI Realtime w/o Person</b> &mdash; Disables person tracking (<span class="tool-name">look_at_person</span>).</li>
+        <li><b>Gemini Live</b> &mdash; Alternative real-time multimodal backend with all tools enabled (tests backend swapability).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Annotation Example -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Human Annotation Protocol</h2>
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
         <figure class="image">
-          <img src="./static/images/hsri_task.png" alt="Figure 3: Our benchmark offers 8 tasks dedicated to probing various facets of AI model's social reasoning.">
-          <figcaption class="has-text-centered"><b>Figure 3</b>: Our benchmark offers 8 tasks dedicated to probing various facets of AI model’s social reasoning with regards to detecting social errors and competencies, identifying social attributes, understanding the progression of social interactions, and rationalization and correction of social errors.</figcaption>
+          <img src="./static/images/anot_fig.png" style="max-width: 85%; margin: auto;" alt="Annotation example showing turn-level human labels for what the robot should do next.">
+          <figcaption class="has-text-centered" style="margin-top: 10px;"><b>Figure 5:</b> Human annotation protocol. For each turn exchange, annotators label what the robot should do next: look at person, look at object, look for an object, or use vision. These annotations serve as ground truth for evaluating system correctness.</figcaption>
         </figure>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Results: System Correctness -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Benchmark Results</h2>
+    <h2 class="title is-3 has-text-centered">Results: System Correctness</h2>
+    <div class="content has-text-justified">
+      <p>
+        We compare the model's tool-call decisions against human "should-do-next" annotations. Both full systems achieve similar turn-level tool-decision correctness: OpenAI Realtime attains 0.72 macro-averaged accuracy with 0.88 precision and 0.62 recall, while Gemini Live reaches 0.77 accuracy with 0.84 precision and 0.60 recall. Ablated variants show expected degradation.
+      </p>
+    </div>
     <div class="columns is-centered">
       <div class="column is-full">
-        <figure class="image">
-          <img src="./static/images/hsri_exp.png" alt="Figure 4: Results per model across all 8 tasks, human performance is marked in dotted lines.">
-          <figcaption class="has-text-centered"><b>Figure 4</b>: Results per model across all 8 tasks, human performance is marked in dotted lines. (L): language-only inputs, (L+V): language and visual inputs. Gemini-1.5-flash does the best in Error/Comp./None detection and error detection tasks, gpt4-o performs the best on attribute identification, internVL2 on multiple attribute presence, gpt-4o and its variants does well on interaction progression(pre, post) reasoning tasks, and o1 performs well on the rationale task and gpt-4o with images and CoT performs best on the repair task. Models from similar sources show similar trends, as indicated by the shape of the radar plot, and upgraded models become ’larger’ (gpt-4o variants).</figcaption>
-        </figure>
+        <div style="overflow-x: auto;">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th rowspan="2">Condition</th>
+                <th colspan="3">Overall</th>
+                <th colspan="3"><span class="tool-name">look_at_person</span></th>
+                <th colspan="3"><span class="tool-name">look_at_object</span></th>
+                <th colspan="3"><span class="tool-name">look_for</span></th>
+                <th colspan="3"><span class="tool-name">use_vision</span></th>
+              </tr>
+              <tr>
+                <th>Acc.</th><th>P</th><th>R</th>
+                <th>Acc.</th><th>P</th><th>R</th>
+                <th>Acc.</th><th>P</th><th>R</th>
+                <th>Acc.</th><th>P</th><th>R</th>
+                <th>Acc.</th><th>P</th><th>R</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>OpenAI Realtime</td>
+                <td>0.72</td><td>0.88</td><td>0.62</td>
+                <td>0.63</td><td>0.52</td><td>1.00</td>
+                <td>0.70</td><td>1.00</td><td>0.19</td>
+                <td>0.93</td><td>1.00</td><td>0.70</td>
+                <td>0.64</td><td>1.00</td><td>0.60</td>
+              </tr>
+              <tr>
+                <td>OpenAI w/o Object</td>
+                <td>0.28</td><td>0.50</td><td>0.26</td>
+                <td>0.42</td><td>1.00</td><td>0.42</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                <td>0.70</td><td>1.00</td><td>0.64</td>
+              </tr>
+              <tr>
+                <td>OpenAI w/o Person</td>
+                <td>0.48</td><td>0.54</td><td>0.35</td>
+                <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                <td>0.69</td><td>0.62</td><td>0.40</td>
+                <td>0.71</td><td>0.53</td><td>0.53</td>
+                <td>0.51</td><td>1.00</td><td>0.48</td>
+              </tr>
+              <tr>
+                <td>Gemini Live</td>
+                <td>0.77</td><td>0.84</td><td>0.60</td>
+                <td>0.76</td><td>0.68</td><td>1.00</td>
+                <td>0.76</td><td>0.67</td><td>0.17</td>
+                <td>0.91</td><td>1.00</td><td>0.60</td>
+                <td>0.65</td><td>1.00</td><td>0.62</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="margin-top: 10px; font-size: 0.9rem; color: #555;">
+          <b>Table 2:</b> System Correctness Measures: LM tool-call predictions compared to human "should-do-next" annotations. Macro-averaged accuracy (Acc.), precision (P), and recall (R) for each system condition, overall and per tool category.
+        </p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Results: Interaction Quality -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Video Demonstration</h2>
+    <h2 class="title is-3 has-text-centered">Results: Overall Interaction Quality</h2>
+    <div class="content has-text-justified">
+      <p>
+        Subjective evaluations show that conversational quality remains consistently high across all system variants (avg. 4.65/5), while categories tied to embodiment&mdash;attention to person and reference to object&mdash;are sensitive to the ablations. Full systems (OpenAI and Gemini) achieve the highest fluency and smoothness scores.
+      </p>
+    </div>
     <div class="columns is-centered">
       <div class="column is-full">
-        <div class="video-container">
-	  <video controls width="100%"> <!-- Add 'controls' for play/pause, etc. -->
-	    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" type="video/mp4">
-	    Your browser does not support the video tag.
-	  </video>
-	</div>
-        <figcaption class="has-text-centered"><b>Video</b>: A short video demonstrating our SHREC Dataset and Benchmark.</figcaption> <!- Optional caption -->
+        <div style="overflow-x: auto;">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Gemini Live</th>
+                <th>OpenAI Realtime</th>
+                <th><i>w/o Person</i></th>
+                <th><i>w/o Objects</i></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fluent and Smooth</td>
+                <td>4.42 &plusmn; 0.85</td>
+                <td>4.62 &plusmn; 0.43</td>
+                <td>3.96 &plusmn; 0.96</td>
+                <td>3.79 &plusmn; 0.92</td>
+              </tr>
+              <tr>
+                <td>Convo. Quality</td>
+                <td>4.79 &plusmn; 0.33</td>
+                <td>4.79 &plusmn; 0.26</td>
+                <td>4.50 &plusmn; 0.60</td>
+                <td>4.50 &plusmn; 0.64</td>
+              </tr>
+              <tr>
+                <td>Attention to Person</td>
+                <td>4.29 &plusmn; 1.18</td>
+                <td>4.75 &plusmn; 0.34</td>
+                <td>4.12 &plusmn; 1.03</td>
+                <td>4.67 &plusmn; 0.39</td>
+              </tr>
+              <tr>
+                <td>Reference to Object</td>
+                <td>4.61 &plusmn; 0.55</td>
+                <td>4.83 &plusmn; 0.33</td>
+                <td>4.08 &plusmn; 1.09</td>
+                <td>3.47 &plusmn; 0.96</td>
+              </tr>
+              <tr>
+                <td>Response Timing &amp; Turn Taking</td>
+                <td>3.89 &plusmn; 1.35</td>
+                <td>4.83 &plusmn; 0.17</td>
+                <td>4.92 &plusmn; 0.15</td>
+                <td>4.72 &plusmn; 0.34</td>
+              </tr>
+              <tr>
+                <td>Interruption &amp; Pauses</td>
+                <td>4.94 &plusmn; 0.19</td>
+                <td>5.00 &plusmn; 0.00</td>
+                <td>4.97 &plusmn; 0.10</td>
+                <td>4.97 &plusmn; 0.10</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="margin-top: 10px; font-size: 0.9rem; color: #555;">
+          <b>Table 3:</b> Overall Interaction Quality Results (mean &plusmn; std on a 5-point Likert scale).
+        </p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Latency and Cost -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Latency &amp; Cost Comparison</h2>
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <div style="overflow-x: auto;">
+          <table class="results-table" style="max-width: 600px; margin: auto;">
+            <thead>
+              <tr>
+                <th></th>
+                <th>OpenAI Realtime</th>
+                <th>Gemini Live</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cost ($ / interaction)</td>
+                <td>$0.047 &plusmn; 0.013</td>
+                <td>$0.018 &plusmn; 0.002</td>
+              </tr>
+              <tr>
+                <td>Latency (ms)</td>
+                <td>690 &plusmn; 389</td>
+                <td>739 &plusmn; 593</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="has-text-centered" style="margin-top: 10px; font-size: 0.9rem; color: #555;">
+          <b>Table 4:</b> Both backends exhibit similar end-to-end latency, but Gemini Live is substantially cheaper per interaction.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Key Findings -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Key Findings</h2>
+    <div class="content has-text-justified">
+      <ul>
+        <li><b>Tool-mediated attention drives situational awareness:</b> Full systems achieve similar tool-decision correctness across backends. Subjective judgments remain near-ceiling for conversational coherence, while categories tied to embodiment (attention-to-person, reference-to-object) drop under ablations that remove the corresponding tools.</li>
+        <li><b>Precision is easy; recall is the bottleneck:</b> Across backends, tools are invoked correctly when invoked (high precision), yet are under-invoked (moderate/low recall). Not looking is itself an error because it breaks common ground and forces users into repair behaviors.</li>
+        <li><b>Prompt and interface design matter:</b> The <span class="tool-name">look_for</span> and <span class="tool-name">look_at_object</span> tools are linguistically close, causing confusion. Future systems should make tool boundaries mutually exclusive where possible.</li>
+        <li><b>Backend-agnostic recipe:</b> Swapping the real-time backend preserves overall tool-decision quality with modest differences in variance, precision/recall trade-offs, and cost.</li>
+        <li><b>Cross-platform portability:</b> The same recipe was deployed on both Jibo and Reachy Mini by reusing the identical dialogue manager and tool schemas and swapping only the embodiment adapter.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Full Video Gallery -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">All Ablation Videos with Jibo</h2>
+    <p class="has-text-centered" style="margin-bottom: 10px; color: #555;">All 24 scenario &times; system variant combinations. Columns: OpenAI Realtime, Gemini Live, w/o Object, w/o Person.</p>
+
+    <!-- Posture -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Posture Coach</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/posture/posture_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/posture/posture_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/posture/posture_openai_no_objects.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/posture/posture_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+    <!-- Whiteboard -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Whiteboard Tutoring</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/board/board_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/board/board_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/board/board_openai_no_object.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/board/board_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+    <!-- Lamp / Deco Placement -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Lamp Placement</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/deco/deco_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/deco/deco_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/deco/deco_openai_no_objects.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/deco/deco_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+    <!-- Plant Doctor -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Plant Doctor</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_openai_no_objects.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/plant/plant_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+    <!-- Outfit Check -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Outfit Check</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/outfit/outfit_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/outfit/outfit_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/outfit/outfit_openai_no_objects.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/outfit/outfit_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+    <!-- Pack / Find Objects -->
+    <p class="scenario-label has-text-centered" style="margin-top: 24px;">Pack / Find Objects</p>
+    <div class="video-grid">
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/pack/pack_openai.mp4" type="video/mp4"></video>
+        <p>OpenAI Realtime</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/pack/pack_gemini.mp4" type="video/mp4"></video>
+        <p>Gemini Live</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/pack/pack_no_objects.mp4" type="video/mp4"></video>
+        <p>w/o Object</p>
+      </div>
+      <div class="video-cell">
+        <video controls muted playsinline preload="metadata"><source src="https://recipe-videos-don.s3.us-east-2.amazonaws.com/videos/jibo/pack/pack_openai_no_person.mp4" type="video/mp4"></video>
+        <p>w/o Person</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Citation -->
 <section class="section" id="BibTeX">
 	<div class="container is-max-desktop content">
 	  <h2 class="title">Citation</h2>
-	  <pre><code>@article{lee2025human,
-  title={The Human Robot Social Interaction (HSRI) Dataset: Benchmarking Foundational Models' Social Reasoning},
-  author={Lee, Dong Won and Kim, Yubin and Guvenoz, Denison and Jeong, Sooyeon and Malachowsky, Parker and Morency, Louis-Philippe and Breazeal, Cynthia and Park, Hae Won},
-  journal={arXiv preprint arXiv:2504.13898},
-  year={2025}
-}
+      <pre><code>@article{lee2026modern,
+      title={A Modern System Recipe for Situated Embodied Human-Robot Conversation with Real-Time Multimodal LLMs and Tool-Calling},
+      author={Lee, Dong Won and Gillet, Sarah and Morency, Louis-Philippe and Breazeal, Cynthia and Park, Hae Won},
+      journal={arXiv preprint arXiv:2602.04157},
+      year={2026}}  
 </code></pre>
 	</div>
 </section>
